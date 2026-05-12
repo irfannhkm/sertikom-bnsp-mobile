@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class AppColors {
   static const primary = Color(0xFF1976D2);
@@ -27,15 +28,26 @@ ThemeData buildAppTheme() {
       surface: AppColors.surface,
     ),
     scaffoldBackgroundColor: AppColors.background,
-    fontFamily: 'Inter',
+  );
+
+  final interText = GoogleFonts.interTextTheme(base.textTheme).apply(
+    bodyColor: AppColors.textPrimary,
+    displayColor: AppColors.textPrimary,
   );
 
   return base.copyWith(
-    appBarTheme: const AppBarTheme(
+    textTheme: interText,
+    appBarTheme: AppBarTheme(
       backgroundColor: AppColors.primary,
       foregroundColor: Colors.white,
       elevation: 0,
       centerTitle: false,
+      titleTextStyle: GoogleFonts.inter(
+        fontSize: 18,
+        fontWeight: FontWeight.w600,
+        color: Colors.white,
+        letterSpacing: -0.2,
+      ),
     ),
     cardTheme: CardThemeData(
       color: AppColors.surface,
@@ -50,6 +62,7 @@ ThemeData buildAppTheme() {
       filled: true,
       fillColor: AppColors.surface,
       contentPadding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+      hintStyle: GoogleFonts.inter(color: AppColors.textSecondary),
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(AppRadius.input),
         borderSide: const BorderSide(color: AppColors.border),
@@ -71,12 +84,12 @@ ThemeData buildAppTheme() {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(AppRadius.button),
         ),
-        textStyle: const TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
+        textStyle: GoogleFonts.inter(
+          fontSize: 15,
+          fontWeight: FontWeight.w600,
+          letterSpacing: 0.2,
+        ),
       ),
-    ),
-    textTheme: base.textTheme.apply(
-      bodyColor: AppColors.textPrimary,
-      displayColor: AppColors.textPrimary,
     ),
   );
 }
