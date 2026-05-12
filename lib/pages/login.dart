@@ -15,6 +15,7 @@ class _LoginPageState extends State<LoginPage> {
   final _passCtl = TextEditingController();
   final _auth = AuthRepository();
   bool _loading = false;
+  bool _obscure = true;
 
   @override
   void dispose() {
@@ -106,8 +107,22 @@ class _LoginPageState extends State<LoginPage> {
               const _Label('PASSWORD'),
               TextField(
                 controller: _passCtl,
-                obscureText: true,
-                decoration: const InputDecoration(hintText: '••••'),
+                obscureText: _obscure,
+                decoration: InputDecoration(
+                  hintText: '••••',
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                      _obscure
+                          ? Icons.visibility_off_outlined
+                          : Icons.visibility_outlined,
+                      color: AppColors.textSecondary,
+                    ),
+                    tooltip: _obscure
+                        ? 'Tampilkan password'
+                        : 'Sembunyikan password',
+                    onPressed: () => setState(() => _obscure = !_obscure),
+                  ),
+                ),
                 onSubmitted: (_) => _submit(),
               ),
               const SizedBox(height: 24),

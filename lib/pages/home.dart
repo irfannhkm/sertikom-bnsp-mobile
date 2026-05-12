@@ -53,10 +53,49 @@ class _HomePageState extends State<HomePage> {
     _refresh();
   }
 
+  Future<void> _confirmLogout() async {
+    final yes = await showDialog<bool>(
+      context: context,
+      builder: (_) => AlertDialog(
+        title: const Text('Keluar'),
+        content: const Text('Yakin keluar dari aplikasi?'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context, false),
+            child: const Text('Batal'),
+          ),
+          TextButton(
+            onPressed: () => Navigator.pop(context, true),
+            child: const Text(
+              'Keluar',
+              style: TextStyle(color: AppColors.accentDanger),
+            ),
+          ),
+        ],
+      ),
+    );
+    if (yes == true) {
+      await _authRepo.logout();
+      if (!mounted) return;
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (_) => const LoginPage()),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Beranda')),
+      appBar: AppBar(
+        title: const Text('Beranda'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.logout_rounded),
+            tooltip: 'Keluar',
+            onPressed: _confirmLogout,
+          ),
+        ],
+      ),
       body: RefreshIndicator(
         onRefresh: _refresh,
         child: ListView(
