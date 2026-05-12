@@ -46,4 +46,7 @@ app.*.map.json
 
 # Local docs (jangan di-commit)
 /docs/asesor/
+
+# Environment variables (jangan di-commit, pakai .env.example sebagai template)
+.env
 /docs/

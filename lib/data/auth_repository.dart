@@ -1,3 +1,4 @@
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../utils/crypto.dart';
 
@@ -5,10 +6,23 @@ import '../utils/crypto.dart';
 ///
 /// Menyimpan: `username` (plaintext), `password_hash` (SHA-256), dan
 /// `is_logged_in` (flag session). Tidak ada server—single user per device.
+///
+/// Kredensial default dibaca dari `.env` (lihat [DEFAULT_USERNAME] dan
+/// [DEFAULT_PASSWORD]). Untuk testing, lewatkan nilai eksplisit via parameter
+/// constructor agar tidak bergantung pada dotenv.
 class AuthRepository {
   static const _kUsername = 'username';
   static const _kPasswordHash = 'password_hash';
   static const _kIsLoggedIn = 'is_logged_in';
+
+  final String _defaultUsername;
+  final String _defaultPassword;
+
+  AuthRepository({String? defaultUsername, String? defaultPassword})
+    : _defaultUsername =
+          defaultUsername ?? dotenv.env['DEFAULT_USERNAME'] ?? 'admin',
+      _defaultPassword =
+          defaultPassword ?? dotenv.env['DEFAULT_PASSWORD'] ?? 'admin';
 
   Future<SharedPreferences> get _prefs => SharedPreferences.getInstance();
 
@@ -17,8 +31,8 @@ class AuthRepository {
   Future<void> seedDefaultUserIfMissing() async {
     final prefs = await _prefs;
     if (!prefs.containsKey(_kUsername)) {
-      await prefs.setString(_kUsername, 'Irfan');
-      await prefs.setString(_kPasswordHash, hashPassword('#Password123!'));
+      await prefs.setString(_kUsername, _defaultUsername);
+      await prefs.setString(_kPasswordHash, hashPassword(_defaultPassword));
     }
   }
 

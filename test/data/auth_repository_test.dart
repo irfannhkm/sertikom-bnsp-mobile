@@ -6,11 +6,14 @@ void main() {
   late AuthRepository repo;
 
   const defaultUser = 'Irfan';
-  const defaultPass = '#Password123!';
+  const defaultPass = 'Password123';
 
   setUp(() async {
     SharedPreferences.setMockInitialValues({});
-    repo = AuthRepository();
+    repo = AuthRepository(
+      defaultUsername: defaultUser,
+      defaultPassword: defaultPass,
+    );
     await repo.seedDefaultUserIfMissing();
   });
 
@@ -48,7 +51,10 @@ void main() {
 
   test('seed does not overwrite existing user', () async {
     await repo.changePassword(defaultPass, 'baru1234');
-    final repo2 = AuthRepository();
+    final repo2 = AuthRepository(
+      defaultUsername: defaultUser,
+      defaultPassword: defaultPass,
+    );
     await repo2.seedDefaultUserIfMissing();
     expect(await repo2.verify(defaultUser, 'baru1234'), true);
   });
