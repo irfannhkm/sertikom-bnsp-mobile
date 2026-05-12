@@ -1,20 +1,13 @@
 import 'package:path/path.dart' as p;
 import 'package:sqflite/sqflite.dart';
 
-/// Singleton koneksi SQLite untuk aplikasi.
-///
-/// Pakai pola lazy-init: koneksi dibuka saat [database] pertama kali diakses,
-/// kemudian dipakai bersama seluruh aplikasi. [setTestDatabase] disediakan
-/// sebagai injection point untuk testing dengan in-memory DB.
 class AppDatabase {
   AppDatabase._();
 
-  /// Instance singleton.
   static final AppDatabase instance = AppDatabase._();
 
   Database? _db;
 
-  /// Akses lazy ke koneksi DB. Buka file kalau belum dibuka.
   Future<Database> get database async {
     if (_db != null) return _db!;
     _db = await _open();
@@ -45,12 +38,10 @@ class AppDatabase {
     );
   }
 
-  /// Inject [db] sebagai koneksi (untuk testing dengan in-memory DB).
   void setTestDatabase(Database db) {
     _db = db;
   }
 
-  /// Tutup koneksi DB (cleanup di akhir test atau saat aplikasi dimatikan).
   Future<void> close() async {
     await _db?.close();
     _db = null;
