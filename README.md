@@ -1,16 +1,28 @@
-# agenda_nusantara
+# Agenda Nusantara
 
-A new Flutter project.
+Aplikasi mobile catatan tugas harian berbasis Flutter dengan penyimpanan lokal SQLite. Mendukung kategorisasi tugas (penting/biasa), statistik harian, grafik mingguan, dan autentikasi offline.
 
-## Getting Started
+---
 
-This project is a starting point for a Flutter application.
+## Screenshot Layar
 
-A few resources to get you started if this is your first Flutter project:
+### Login
+![Login](assets/login.png)
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+### Dashboard / Beranda
+![Dashboard](assets/dashboard.png)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### Tambah Tugas Penting
+![Add Tugas Penting](assets/add_tugas_penting.png)
+
+### Tambah Tugas Biasa
+![Add Tugas Biasa](assets/add_tugas_biasa.png)
+
+### Daftar Tugas
+![Daftar Tugas](assets/daftar_tugas.png)
+
+### Pengaturan
+![Pengaturan](assets/pengaturan.png)
+
+---
+
