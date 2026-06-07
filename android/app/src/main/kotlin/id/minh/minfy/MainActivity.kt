@@ -1,4 +1,4 @@
-package id.polinema.jti.agenda_nusantara
+package id.minh.minfy
 
 import io.flutter.embedding.android.FlutterActivity
 

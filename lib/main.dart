@@ -14,17 +14,17 @@ void main() async {
   final auth = AuthRepository();
   await auth.seedDefaultUserIfMissing();
   final loggedIn = await auth.isLoggedIn();
-  runApp(AgendaNusantaraApp(initialLoggedIn: loggedIn));
+  runApp(MinfyApp(initialLoggedIn: loggedIn));
 }
 
-class AgendaNusantaraApp extends StatelessWidget {
+class MinfyApp extends StatelessWidget {
   final bool initialLoggedIn;
-  const AgendaNusantaraApp({super.key, required this.initialLoggedIn});
+  const MinfyApp({super.key, required this.initialLoggedIn});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Agenda Nusantara',
+      title: 'MINFY',
       debugShowCheckedModeBanner: false,
       theme: buildAppTheme(),
       locale: const Locale('id', 'ID'),
